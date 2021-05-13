@@ -1,36 +1,37 @@
 import IRequest from '../interfaces/IRequest'
 
-class Request implements IRequest{
-  headers: Map<string, string>
-  queryParams: Map<string, string>
-  method: string
-  url: string
-  preRequestScript: string
-  body: any
+class Request implements IRequest {
 
-  constructor(url: string, method: string){
-  	const urlToken: Array<string> = url.split('?')
-  	this.url = urlToken[0]
+	headers: Map<string, string>
+	queryParams: Map<string, string>
+	method: string
+	url: string
+	preRequestScript: string
+	body: any
 
-  	this.queryParams = urlToken.length > 1 ? this.prepareQueryParams(urlToken[1]): {}
-  	this.headers = {}
-  	this.method = 'GET'
-  	this.preRequestScript = null
-  	this.body = null
-  }
-  
+	constructor(url: string, method: string){
+		const urlToken: Array<string> = url.split('?')
+		this.url = urlToken[0]
 
-  private prepareQueryParams(querystring: string): Map<string, string>{
-  	const queryMap: Map<string, string> = {}
-  	const entries: Array<string> = querystring.split('&')
+		this.queryParams = urlToken.length > 1 ? this.prepareQueryParams(urlToken[1]): new Map()
+		this.headers = new Map()
+		this.method = 'GET'
+		this.preRequestScript = ''
+		this.body = null
+	}
 
-  	entries.forEach( (entry: string) => {
-  		const key = entry.substr(0, entry.indexOf('='))
-  		const value = entry.substr(entry.indexOf('='))
-  		this.queryParams[key] = value
-  	})
 
-  	return this.queryParams
+	private prepareQueryParams(querystring: string): Map<string, string>{
+		const queryMap: Map<string, string> = new Map()
+		const entries: Array<string> = querystring.split('&')
 
-  }
+		entries.forEach( (entry: string) => {
+			const key = entry.substr(0, entry.indexOf('='))
+			const value = entry.substr(entry.indexOf('='))
+			queryMap.set(key, value)
+		})
+
+		return queryMap
+
+	}
 }

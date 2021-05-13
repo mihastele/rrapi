@@ -1,8 +1,8 @@
 
 
-interface IQueryParam {
+interface IHeader <k, v> {
   name: string;
   value: string;
 }
 
-export default IQueryParam
+export default IHeader
