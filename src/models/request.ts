@@ -1,4 +1,6 @@
 import IRequest from '../interfaces/IRequest'
+import IScript from '../interfaces/IScript'
+import Script from './Script'
 
 class Request implements IRequest {
 
@@ -6,7 +8,7 @@ class Request implements IRequest {
 	queryParams: Map<string, string>
 	method: string
 	url: string
-	preRequestScript: string
+	scripts: IScript
 	body: any
 
 	constructor(url: string, method: string){
@@ -15,8 +17,8 @@ class Request implements IRequest {
 
 		this.queryParams = urlToken.length > 1 ? this.prepareQueryParams(urlToken[1]): new Map()
 		this.headers = new Map()
-		this.method = 'GET'
-		this.preRequestScript = ''
+		this.method = method
+		this.scripts = n
 		this.body = null
 	}
 
