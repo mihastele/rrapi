@@ -1,5 +1,5 @@
-import IRequest from '../interfaces/IRequest'
-import IScript from '../interfaces/IScript'
+import IRequest from '../../interfaces/IRequest'
+import IScript from '../../interfaces/IScript'
 import Script from './Script'
 
 class Request implements IRequest {
