@@ -1,4 +1,4 @@
-import IHeader from './IHeader'
+import IScript from './IScript'
 
 enum RequestMethod {
   GET, POST, PUT, DELETE, OPTIONS, PATCH // CONNECT, TRACE
@@ -11,7 +11,7 @@ interface IRequest {
   method: string
   
   url: string
-  preRequestScript: string
+  scripts: IScript
 
   body: any
 

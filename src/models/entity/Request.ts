@@ -11,17 +11,25 @@ class Request implements IRequest {
 	scripts: IScript
 	body: any
 
-	constructor(url: string, method: string){
+	constructor(url = '', method = 'GET'){
 		const urlToken: Array<string> = url.split('?')
 		this.url = urlToken[0]
 
 		this.queryParams = urlToken.length > 1 ? this.prepareQueryParams(urlToken[1]): new Map()
 		this.headers = new Map()
 		this.method = method
-		this.scripts = n
+		this.scripts = new Script()
 		this.body = null
 	}
 
+
+	public setUrl (url: string): void{
+		this.url = url
+	}
+
+	public setMethod (method: string): void{
+		this.method = method
+	}
 
 	private prepareQueryParams(querystring: string): Map<string, string>{
 		const queryMap: Map<string, string> = new Map()
@@ -37,3 +45,5 @@ class Request implements IRequest {
 
 	}
 }
+
+export default Request
